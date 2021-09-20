@@ -66,24 +66,24 @@ class Profile(models.Model):
     return self.username.username
   
 class Rate(models.Model):
-		design = models.IntegerField(choices=rating, null=True, blank=True, default=0)
-		usability = models.IntegerField(choices=rating, null=True, blank=True, default=0)
-		content = models.IntegerField(choices=rating, null=True, blank=True, default=0)
-		design_average = models.FloatField(default=0, blank=True)
-		usability_average = models.FloatField(default=0, blank=True)
-		content_average = models.FloatField(default=0, blank=True)
-		overall = models.FloatField(default=0, blank=True)
-		review = models.CharField(max_length=300, blank=True, null=True)
-		project = models.ForeignKey(Projects, on_delete=models.CASCADE) 
-		user = models.ForeignKey(User, on_delete=models.CASCADE)
+	design = models.IntegerField(choices=rating, null=True, blank=True, default=0)
+	usability = models.IntegerField(choices=rating, null=True, blank=True, default=0)
+	content = models.IntegerField(choices=rating, null=True, blank=True, default=0)
+	design_average = models.FloatField(default=0, blank=True)
+	usability_average = models.FloatField(default=0, blank=True)
+	content_average = models.FloatField(default=0, blank=True)
+	overall = models.FloatField(default=0, blank=True)
+	review = models.CharField(max_length=300, blank=True, null=True)
+	project = models.ForeignKey(Projects, on_delete=models.CASCADE) 
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-  def __str__(self):
-    return self.review[:20]
+	def __str__(self):
+  	return self.review[:20]
 
-  @classmethod
-  def get_rates(cls, id):
+	@classmethod
+	def get_rates(cls, id):
     ratings = cls.objects.filter(id=id).all()
     return ratings
 
-  def save_rate(self):
+	def save_rate(self):
     self.save()
