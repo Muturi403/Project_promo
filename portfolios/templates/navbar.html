@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand ml-md-3" href="/"><span class="aWording">A</span>WWARDS.</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fad fa-bars hambars"></i></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mx-auto text-center">
+      <li class="nav-item active"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+      {% if user.is_authenticated %}
+      <li class="nav-item active"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
+      <li class="nav-item active"><a class="nav-link" href="{% url 'postproject' %}">Submit Your Site</a></li>
+      <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <li class="nav-item active"><a class="nav-link" href="/accounts/login">Login</a></li>
+      {% endif %}
+    </ul>
+    <form class="form-inline d-flex flex-column justify-content-center align-items-center searchdivform p-2" role="search" action='{% url "search" %}'>
+      <div class="searchform">
+        <div class="search">
+          <input class="form-control" name="search" type="search" placeholder="Search..." aria-label="Search">
+          <button type="submit" class="searchButton btn"><i class="fad fa-search"></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</nav>
