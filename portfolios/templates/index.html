@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='landing d-flex justify-content-center align-items-center'>
+  <div class="container  text-center">
+    <H1 class="headwording"><span class='headword'>A</span>WWARDS <span class='headword'>2021</span></H1>
+    <p>POST YOUR PROJECTS & RECEIVE REVIEWS AND RATINGS</p>
+  </div>
+</div>
+<div class="container mt-md-5">
+  <div class="text-center mb-md-3">
+    <div class='d-flex justify-content-between align-items-center'>
+      <h5>Sites of the Day</h5>
+      <p>{{ today_date }}</p>
+    </div>
+    <div class="row">
+      {% for pic in siteday %}
+      <div class="sitecont col-md-4">
+        <img src="{{ pic.image.url }}" alt="{{ pic.title }}" class="img-fluid siteday image">
+        <div class="middle ml-3 d-flex justify-content-center align-items-center">
+          <a href="facebook.com" data-toggle="tooltip" data-placement="right" title="Facebook"><i class="fab fa-facebook text"></i></a>
+          <a href="twitter.com" data-toggle="tooltip" data-placement="right" title="twitter"><i class="fab fa-twitter text"></i></a>
+          <a href="{{ pic.livelink }}" data-toggle="tooltip" data-placement="right" title="View Site"><i class="fab fa-github-alt text"></i></a>
+          <a href="{% url 'projectdetails'  pic.id %}" data-toggle="tooltip" data-placement="right" title="More Details"><i class="fad fa-info-circle text"></i></i></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="separator mt-md-5 mb-md-5">Projects</div>
+</div>
+<div class="container-fluid">
+  <div class="wrapper-grid justify-content-center align-items-center text-center mb-5">
+    {% for project in allprojects %}
+    <div class='mr-3 mt-5 contimage'>
+      <a class='proj' href="{% url 'projectdetails'  project.id %}"><img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid userpics"></a>
+      <div class="text-left p-2">
+        <p><strong>{{ project.title }}</strong></p>
+        <hr>
+        <div class="d-flex justify-content-between align-items-center">
+          <span>By <a href="{% url 'userprofile' project.projectowner.profile.id %}">{{ project.projectowner.profile }}</a></span>
+          <span><sub> From Kenya</sub></span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
