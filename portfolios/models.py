@@ -7,6 +7,22 @@ from django.dispatch import receiver
 from django.db.models import Q
 from cloudinary.models import CloudinaryField
 
+
+
+rating = (
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+    (4, '4'),
+    (5, '5'),
+    (6, '6'),
+    (7, '7'),
+    (8, '8'),
+    (9, '9'),
+    (10, '10'),
+)
+
+
 class Projects(models.Model):
   title = models.CharField(max_length=200)
   image = CloudinaryField('project/', null=True, blank=True)
