@@ -9,7 +9,6 @@ from cloudinary.models import CloudinaryField
 
 class Projects(models.Model):
   title = models.CharField(max_length=200)
-  # image = models.ImageField(upload_to='project/', null=True, blank=True)
   image = CloudinaryField('project/', null=True, blank=True)
   projectowner = models.ForeignKey(User, on_delete=models.CASCADE)
   description = HTMLField(null=True, blank=True)
@@ -47,9 +46,7 @@ class Projects(models.Model):
   class Meta:
     ordering = ['-id']
 
-
 class Profile(models.Model):
-  # profilePic = models.ImageField(upload_to='userProfile/', default='userProfile/test.png')
   profilePic = CloudinaryField('userProfile/', default='userProfile/test.png')
   username = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
   bio = HTMLField(blank=True, null=True)
@@ -67,3 +64,26 @@ class Profile(models.Model):
 
   def __str__(self):
     return self.username.username
+  
+class Rate(models.Model):
+		design = models.IntegerField(choices=rating, null=True, blank=True, default=0)
+		usability = models.IntegerField(choices=rating, null=True, blank=True, default=0)
+		content = models.IntegerField(choices=rating, null=True, blank=True, default=0)
+		design_average = models.FloatField(default=0, blank=True)
+		usability_average = models.FloatField(default=0, blank=True)
+		content_average = models.FloatField(default=0, blank=True)
+		overall = models.FloatField(default=0, blank=True)
+		review = models.CharField(max_length=300, blank=True, null=True)
+		project = models.ForeignKey(Projects, on_delete=models.CASCADE) 
+		user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.review[:20]
+
+  @classmethod
+  def get_rates(cls, id):
+    ratings = cls.objects.filter(id=id).all()
+    return ratings
+
+  def save_rate(self):
+    self.save()
