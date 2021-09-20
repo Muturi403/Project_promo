@@ -78,12 +78,12 @@ class Rate(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 	def __str__(self):
-  	return self.review[:20]
+			return self.review[:20]
 
 	@classmethod
 	def get_rates(cls, id):
-    ratings = cls.objects.filter(id=id).all()
-    return ratings
+			ratings = cls.objects.filter(id=id).all()
+			return ratings
 
 	def save_rate(self):
-    self.save()
+			self.save()
